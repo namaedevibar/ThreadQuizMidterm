@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     randomColorNames();
                 }
                 else {
+                    thread.interrupt();
                     mTrue.setEnabled(false);
                     mFalse.setEnabled(false);
                 }
@@ -100,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mScore.setText("Score: "+score);
         randomColors();
         randomColorNames();
+        thread.interrupt();
 
         thread = new Thread(new TimerThread());
         thread.start();
@@ -173,12 +176,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void run() {
 
-                for (int i=0; i<11; i++){
+            try {
+                for (int i=10; i>0; i--){
                         Message message = (new Message()).obtain();
                         message.arg1=i;
                         handler.sendMessage(message);
-                        try {
-                            Thread.sleep(1000);
+
+                            Thread.sleep(1000);}
+
                         } catch (InterruptedException e) {
 
                         }
@@ -187,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
 
-            }
+
 
 
 
