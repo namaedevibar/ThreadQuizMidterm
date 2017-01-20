@@ -182,9 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         } catch (InterruptedException e) {
 
                         }
-                        if (i==10){
-                            score--;
-                        }
+
                     }
                 }
             }
